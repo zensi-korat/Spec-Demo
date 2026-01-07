@@ -1,50 +1,86 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+─────────────────────────────────────────────────────────────────────
+Version change: 0.0.0 → 1.0.0 (MAJOR: initial ratification)
+Modified principles:
+  - Added: I. React + Tailwind + TypeScript Stack
+  - Added: II. Component Reusability
+  - Added: III. Responsive Design (Mobile-First)
+  - Added: IV. Accessibility (ARIA Standards)
+  - Added: V. Performance & Lazy Loading
+Added sections:
+  - Technology Constraints
+  - Development Workflow
+Removed sections: None
+Templates requiring updates:
+  ✅ .specify/templates/plan-template.md - No update needed (generic template)
+  ✅ .specify/templates/spec-template.md - No update needed (generic template)
+  ✅ .specify/templates/tasks-template.md - No update needed (generic template)
+Follow-up TODOs:
+  - TODO(RATIFICATION_DATE): Set original adoption date when project formally adopts this constitution
+─────────────────────────────────────────────────────────────────────
+-->
+
+# Spec-Demo Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. React + Tailwind + TypeScript Stack
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All UI development MUST use React 18+ as the framework, Tailwind CSS for styling, and TypeScript with strict mode enabled. No plain JavaScript files are permitted in the codebase.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Rationale**: Enforces type safety, modern component patterns, and utility-first styling for maintainability and developer experience.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Component Reusability
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Components MUST be designed for reuse across the application. Shared UI components belong in `/src/components/ui` following shadcn/ui conventions. Business logic MUST be extracted to `/src/lib` utilities when used by multiple components.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Reduces duplication, ensures consistency, and accelerates feature development through composable building blocks.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Responsive Design (Mobile-First)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+All layouts MUST be designed mobile-first using Tailwind's responsive breakpoints. Desktop views are enhancements, not the baseline. Test on mobile viewports before desktop.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Rationale**: Mobile traffic is primary; mobile-first design ensures usable experiences across all device sizes.
+
+### IV. Accessibility (ARIA Standards)
+
+Interactive elements MUST include appropriate ARIA labels, roles, and keyboard navigation support. Color contrast MUST meet WCAG AA standards minimum. No decorative images without alt text.
+
+**Rationale**: Ensures the application is usable by everyone, including users with disabilities, and meets legal accessibility requirements.
+
+### V. Performance & Lazy Loading
+
+Non-critical code MUST be lazy-loaded using dynamic imports and React.lazy. Bundle size MUST be monitored; avoid heavy third-party libraries. Prefer vanilla JavaScript utilities over library dependencies.
+
+**Rationale**: Faster initial load times and better user experience, especially on slower networks and devices.
+
+## Technology Constraints
+
+**Data Storage**: No backend services. All data persistence MUST use IndexedDB for client-side storage. Consider localStorage only for small, non-critical data.
+
+**Dependencies**: Avoid heavy utility libraries (lodash, moment, etc.). Write vanilla JavaScript/TypeScript helpers in `/src/lib` instead. Only add dependencies that provide significant value and cannot be easily implemented.
+
+**Styling**: Tailwind CSS is the primary styling solution. CSS variables defined in the theme manage colors and spacing. Avoid writing custom CSS unless absolutely necessary.
+
+## Development Workflow
+
+**Type Safety**: All code MUST pass TypeScript strict checks before commit. No `any` types without explicit justification and approval.
+
+**Code Quality**: Lint (ESLint) and format (Prettier) checks MUST pass in CI/CD. Use absolute imports (`@/`) for all internal modules.
+
+**Component Structure**: Follow shadcn/ui patterns for component organization. Export named components with proper TypeScript interfaces.
+
+**Performance Review**: Identify and document lazy-load boundaries for routes and heavy components. Review bundle impact before merging new dependencies.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and guides for the Spec-Demo project. All feature specifications, implementation plans, and code reviews MUST verify compliance with these principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendments**: Changes to this constitution require proposal documentation, team review, and explicit version bump. Breaking changes (removing or contradicting principles) increment MAJOR version. New principles or expanded guidance increment MINOR version. Clarifications and typo fixes increment PATCH version.
+
+**Compliance**: Pull requests that violate principles require documented exceptions with clear justification and sunset timeline. Complexity that conflicts with principles (e.g., heavy dependencies) must be justified in plan documents.
+
+**Versioning Policy**: This document follows semantic versioning (MAJOR.MINOR.PATCH).
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2026-01-07
